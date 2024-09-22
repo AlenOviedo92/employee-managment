@@ -29,8 +29,8 @@
                 <h6 class="alert alert-danger">{{ $message }}</h6>
             @enderror
 
-            <div class="mb-3">
-                <h3>Crear Nuevo Empleado</h3>
+            <div class="mb-3 text-center"> 
+                <h3>Crear empleado</h3>
             </div>
 
             <div class="mb-3">
@@ -53,7 +53,7 @@
                 <label for="fecha" class="form-label">Fecha de contratación:</label>
                 <input type="date" class="form-control" id="fecha" name="fecha">
             </div>
-            <button type="submit" class="btn btn-primary">Crear nuevo empleado</button>
+            <button type="submit" class="btn btn-primary w-100">Crear nuevo empleado</button>
         </form>
     </div>
 @endsection

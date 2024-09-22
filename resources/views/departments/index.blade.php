@@ -14,8 +14,8 @@
                 <h6 class="alert alert-danger">{{ $message }}</h6>
             @enderror
 
-            <div class="mb-3">
-                <h3>Crear Nuevo Departmamento</h3>
+            <div class="mb-3 text-center">
+                <h3>Crear departamamento</h3>
             </div>
 
             <div class="mb-3">
@@ -23,7 +23,7 @@
                 <input type="text" class="form-control" id="name" name="name">
             </div>
             
-            <button type="submit" class="btn btn-primary">Crear nuevo Departamento</button>
+            <button type="submit" class="btn btn-primary w-100">Crear nuevo departamento</button>
         </form>
         </div>
     </div>
