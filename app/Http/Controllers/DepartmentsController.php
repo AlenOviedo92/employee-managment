@@ -13,7 +13,7 @@ class DepartmentsController extends Controller
     public function index()
     {
         $departments = Department::all();
-        return view('departments.index', ['departments'=> $departments ]);
+        return view('departments.allDepartments', [ 'departments'=> $departments ]);
     }
 
     /**
@@ -21,7 +21,8 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::all();
+        return view('departments.index', [ 'departments'=> $departments ]);
     }
 
     /**
@@ -36,7 +37,7 @@ class DepartmentsController extends Controller
         $department->name = $request->name;
         $department->save();
 
-        return redirect()->route('departments.index')->with('success', 'Nuevo Departamento agregado');
+        return redirect()->route('departments.index')->with('success', 'Nuevo departamento agregado');
     }
 
     /**
