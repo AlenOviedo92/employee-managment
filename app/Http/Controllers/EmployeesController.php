@@ -10,12 +10,8 @@ class EmployeesController extends Controller
 {
     // 1. index: para mostrar todos los employees
     public function index() {
-        // $employees = Employee::all();
-        // $departments = Department::all();
-        // return view('employees.allEmployees', ['employees' => $employees, 'departments' => $departments ]);
-
         // Cargo los empleados junto con sus departamentos
-        $employees = Employee::with('department')->get();
+        $employees = Employee::with('department')->paginate(5);
         return view('employees.allEmployees', compact('employees'));
     }
 
@@ -44,7 +40,7 @@ class EmployeesController extends Controller
     // 3. show: para mostrar el formulario de edición
     public function show($id) {
         $employee = Employee::find($id);
-        $departments = Department::all();  // Trae todos los departamentos
+        $departments = Department::all();                                                         // Trae todos los departamentos
         return view('employees.show', ['employee' => $employee, 'departments' => $departments ]); // Envío empleados y departamentos
     }
 
@@ -52,14 +48,14 @@ class EmployeesController extends Controller
     public function update(Request $request, $id) {
         $request->validate([
             'name' => "required|min:3",
-            'email' => "required|email|unique:employees,email,$id", // Asegúrate de que el correo sea único, excepto para el empleado que estás editando
+            'email' => "required|email|unique:employees,email,$id",
             'puesto' => "required|min:3",
             'salario' => "required|numeric",
             'fecha' => "required|date",
             'department_id' => "required"
         ]);
     
-        $employee = Employee::findOrFail($id);  // Busca el empleado por id, o lanza una excepción si no lo encuentra
+        $employee = Employee::findOrFail($id);                                                    // Busca el empleado por id, o lanza una excepción si no lo encuentra
         $employee->name = $request->name;
         $employee->email = $request->email;
         $employee->puesto = $request->puesto;
@@ -67,7 +63,7 @@ class EmployeesController extends Controller
         $employee->fecha = $request->fecha;
         $employee->department_id = $request->department_id;
     
-        $employee->save();  // Guarda los cambios en la base de datos
+        $employee->save();                                                                        // Guarda los cambios en la base de datos
     
         return redirect()->route('employees')->with('success', 'Empleado actualizado correctamente');
     }    
@@ -76,7 +72,6 @@ class EmployeesController extends Controller
     public function destroy($id) {
         $employee = Employee::find($id);
         $employee->delete();
-
         return redirect()->route('employees')->with('success', 'Empleado eliminado');
     }
 
@@ -84,6 +79,6 @@ class EmployeesController extends Controller
     public function create() {
         $employees = Employee::all();
         $departments = Department::all();
-        return view('employees.index', ['employees' => $employees, 'departments' => $departments ]);                       // La vista del formulario es 'index.blade.php'
+        return view('employees.index', ['employees' => $employees, 'departments' => $departments ]); // La vista del formulario es 'index.blade.php'
     }
 }

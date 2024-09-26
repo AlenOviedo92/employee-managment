@@ -47,5 +47,11 @@
                 @endforeach
             </tbody>
         </table>
+        <!-- Paginación -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {{ $departments->links('pagination::bootstrap-4') }}
+            </ul>
+        </nav>
     </div>
 @endsection
