@@ -29,6 +29,10 @@
                 <h6 class="alert alert-danger">{{ $message }}</h6>
             @enderror
 
+            @error('department_id')                        
+                <h6 class="alert alert-danger">{{ $message }}</h6>
+            @enderror
+
             <div class="mb-3 text-center"> 
                 <h3>Crear empleado</h3>
             </div>

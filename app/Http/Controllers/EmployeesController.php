@@ -10,9 +10,13 @@ class EmployeesController extends Controller
 {
     // 1. index: para mostrar todos los employees
     public function index() {
-        $employees = Employee::all();
-        $departments = Department::all();
-        return view('employees.allEmployees', ['employees' => $employees, 'departments' => $departments ]);
+        // $employees = Employee::all();
+        // $departments = Department::all();
+        // return view('employees.allEmployees', ['employees' => $employees, 'departments' => $departments ]);
+
+        // Cargo los empleados junto con sus departamentos
+        $employees = Employee::with('department')->get();
+        return view('employees.allEmployees', compact('employees'));
     }
 
     // 2. store: para guardar en la DB un employee
@@ -40,7 +44,8 @@ class EmployeesController extends Controller
     // 3. show: para mostrar el formulario de edición
     public function show($id) {
         $employee = Employee::find($id);
-        return view('employees.show', ['employee' => $employee ]);
+        $departments = Department::all();  // Trae todos los departamentos
+        return view('employees.show', ['employee' => $employee, 'departments' => $departments ]); // Envío empleados y departamentos
     }
 
     // 4. update: para actualizar un employee
@@ -50,7 +55,8 @@ class EmployeesController extends Controller
             'email' => "required|email|unique:employees,email,$id", // Asegúrate de que el correo sea único, excepto para el empleado que estás editando
             'puesto' => "required|min:3",
             'salario' => "required|numeric",
-            'fecha' => "required|date"
+            'fecha' => "required|date",
+            'department_id' => "required"
         ]);
     
         $employee = Employee::findOrFail($id);  // Busca el empleado por id, o lanza una excepción si no lo encuentra
@@ -59,6 +65,7 @@ class EmployeesController extends Controller
         $employee->puesto = $request->puesto;
         $employee->salario = $request->salario;
         $employee->fecha = $request->fecha;
+        $employee->department_id = $request->department_id;
     
         $employee->save();  // Guarda los cambios en la base de datos
     

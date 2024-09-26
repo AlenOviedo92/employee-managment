@@ -30,6 +30,10 @@
                 <h6 class="alert alert-danger">{{ $message }}</h6>
             @enderror
 
+            @error('department_id')                        
+                <h6 class="alert alert-danger">{{ $message }}</h6>
+            @enderror
+
             <div class="mb-3">
                 <h3>Actualizar empleado</h3>
             </div>
@@ -53,6 +57,15 @@
             <div class="mb-3">
                 <label for="fecha" class="form-label">Fecha de contratación:</label>
                 <input type="date" class="form-control" id="fecha" name="fecha" value="{{ $employee->fecha }}">
+            </div>
+            <div class="mb-3">
+                <label for="department_id" class="form-label">Departamento de residencia:</label>
+                <select name="department_id" class="form-control" id="department_id">
+                    <option value="">Selecciona un departamento</option>
+                    @foreach ($departments as $department)
+                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Actualizar empleado</button>
         </form>

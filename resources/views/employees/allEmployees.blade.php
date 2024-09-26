@@ -5,12 +5,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Email</th>
                     <th scope="col">Puesto</th>
                     <th scope="col">Salario</th>
                     <th scope="col">Fecha de contratación</th>
+                    <th scope="col">Departamento</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -24,6 +25,7 @@
                     <td>{{ $employee->puesto }}</td>
                     <td>{{ $employee->salario }}</td>
                     <td>{{ $employee->fecha }}</td>
+                    <td>{{ $employee->department ? $employee->department->name : 'Sin departamento' }}</td>
                     <td>
                         <!-- Botones para editar o eliminar -->
                         <a href="{{ route('employees-edit', ['id' => $employee->id]) }}" class="btn btn-primary btn-sm">Editar</a>
