@@ -75,6 +75,9 @@ class DepartmentsController extends Controller
     public function destroy(string $department)
     {
         $department = Department::find($department);
+        // Primero elimino todos los empleados asociados al departamento
+        $department->employees()->delete();
+        // Luego eliminao el departamento
         $department->delete();
 
         return redirect()->route('departments.index')->with('success', 'Departamento eliminado');

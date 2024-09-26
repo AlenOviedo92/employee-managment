@@ -53,6 +53,15 @@
                 <label for="fecha" class="form-label">Fecha de contratación:</label>
                 <input type="date" class="form-control" id="fecha" name="fecha">
             </div>
+            <div class="mb-3">
+                <label for="department_id" class="form-label">Departamento de residencia:</label>
+                <select name="department_id" class="form-control" id="department_id">
+                    <option value="">Selecciona un departamento</option>
+                    @foreach ($departments as $department)
+                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary w-100">Crear nuevo empleado</button>
         </form>
     </div>

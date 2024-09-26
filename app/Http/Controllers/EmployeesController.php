@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Department;
 
 class EmployeesController extends Controller
 {
     // 1. index: para mostrar todos los employees
     public function index() {
         $employees = Employee::all();
-        return view('employees.allEmployees', ['employees' => $employees ]);
+        $departments = Department::all();
+        return view('employees.allEmployees', ['employees' => $employees, 'departments' => $departments ]);
     }
 
     // 2. store: para guardar en la DB un employee
@@ -19,8 +21,9 @@ class EmployeesController extends Controller
             'name' => "required|min:3",                                                     // El campo name es obligatorio y debe tener mínimo 3 caracteres
             'email' => "required|email|unique:employees,email", 
             'puesto' => "required|min:3", 
-            'salario' => "required|numeric", 
-            'fecha' => "required|date"
+            'salario' => "required|numeric|min:0|max:999999999",
+            'fecha' => "required|date",
+            'department_id' => "required"
         ]);
         $employee = new Employee;
         $employee->name = $request->name;
@@ -28,12 +31,13 @@ class EmployeesController extends Controller
         $employee->puesto = $request->puesto;
         $employee->salario = $request->salario;
         $employee->fecha = $request->fecha;
+        $employee->department_id = $request->department_id;
 
         $employee->save();                                                                       // save: método que tienen todos los modelos para guardar un nuevo elemento en la DB
         return redirect()->route('employees')->with('success', 'Empleado creado correctamente'); // redirect: redirije al usuario a la ruta "employees" y el método with sirve para enviar el msj 'Empleado creado correctamente'
     }
 
-    // 3. edit para mostrar el formulario de edición
+    // 3. show: para mostrar el formulario de edición
     public function show($id) {
         $employee = Employee::find($id);
         return view('employees.show', ['employee' => $employee ]);
@@ -72,6 +76,7 @@ class EmployeesController extends Controller
     // 6. create: para mostrar el formulario de creación de empleados
     public function create() {
         $employees = Employee::all();
-        return view('employees.index', ['employees' => $employees ]);                       // La vista del formulario es 'index.blade.php'
+        $departments = Department::all();
+        return view('employees.index', ['employees' => $employees, 'departments' => $departments ]);                       // La vista del formulario es 'index.blade.php'
     }
 }

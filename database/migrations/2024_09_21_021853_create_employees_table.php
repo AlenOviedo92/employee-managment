@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('puesto');
-            $table->numeric('salario');
+            $table->decimal('salario');
             $table->date('fecha');
             $table->timestamps();
         });

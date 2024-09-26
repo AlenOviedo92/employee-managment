@@ -17,12 +17,6 @@
                     <td>{{ $department->name }}</td>
                     <td>
                         <!-- Botón para eliminar -->
-                        
-                        <!-- <form action="{{ route('departments.destroy', [$department->id]) }}" method="POST" style="display:inline;">
-                            @method('DELETE')
-                            @csrf
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </form> -->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{ $department->id }}">
                             Eliminar
                         </button>
