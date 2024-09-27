@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\RolesController;
 
 Route::get('/', [EmployeesController::class, 'create'])->name('home');
 
@@ -19,3 +20,5 @@ Route::delete('/empleados/{id}', [EmployeesController::class, 'destroy'])->name(
 Route::get('/employees/all', [EmployeesController::class, 'allEmployees'])->name('employees-all');
 
 Route::resource('departments', DepartmentsController::class);
+
+Route::resource('roles', RolesController::class);

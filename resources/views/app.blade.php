@@ -43,10 +43,16 @@
           <a class="nav-link active" aria-current="page" href="/departments">Departamentos</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/roles">Roles</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Crear empleado</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ route('departments.create') }}">Crear departamento</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ route('roles.create') }}">Crear rol</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
